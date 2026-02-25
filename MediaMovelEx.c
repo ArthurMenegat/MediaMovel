@@ -1,27 +1,37 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-static void media_movel(unsigned int janela);
+#define MAX_VALORES 5
 
-static void media_movel(unsigned int janela)
+static void calcularMediaMovel(unsigned int janela);
+
+static void calcularMediaMovel(unsigned int janela)
 {
-    printf("%u\n", janela);
-}
 
-//change
+}
 
 int main(void)
 {
+    float valores[MAX_VALORES];
     unsigned int janela = 0;
-    int *ptr = malloc(sizeof(janela));
-    int exit = 0;
 
-    puts("Insira a janela de amostragem:");
-    scanf("%u", &janela);
+    puts("Insira os valores:");
 
-    media_movel(janela);
+    for(int i = 0; i < MAX_VALORES; i ++)
+    {
+        scanf("%f", &valores[i]);
+    }
 
-    scanf(" %d", &exit);
+    puts("Insira a janela:");
+    scanf(" %u", &janela);
+
+    printf("Valores: ");
+
+    for(int i = 0; i < MAX_VALORES; i++)
+    {
+        printf("%.2f ", valores[i]);
+    }
+
+    printf("Janela: %u", janela);
 
     return 0;
 }
