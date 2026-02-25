@@ -2,13 +2,11 @@
 
 #define MAX_VALORES 5
 
-static float calcularMediaMovelExponencial(float valor_atual, float valor_anterior, unsigned int janela);
+static float calcularMME(float valor_atual, float valor_anterior, float alpha);
 
-static float calcularMediaMovelExponencial(float valor_atual, float valor_anterior, unsigned int janela)
+static float calcularMME(float valor_atual, float valor_anterior, float alpha)
 {
-    float constante = 1 / (janela + 1);
-
-    return (valor_atual - valor_anterior) * constante + valor_anterior;
+    return (alpha * valor_atual) + ((1.0f - alpha) * valor_anterior);
 }
 
 int main(void)
@@ -23,17 +21,16 @@ int main(void)
         scanf("%f", &valores[i]);
     }
 
-    puts("Insira a janela:");
-    scanf(" %u", &janela);
+    puts("Insira o tamanho da janela:");
+    scanf("%u", &janela);
 
-    int n = sizeof(valores) / sizeof(valores[0]);
+    float mediaMovel = valores[0];
+    float alpha = 2.0f / (janela + 1.0f);
 
-    float media_movel = valores[0];
-
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < MAX_VALORES; i++)
     {
-       media_movel = calcularMediaMovelExponencial(valores[i], media_movel, janela);
-       printf("Valor: %.2f | EMA: %.2f\n", valores[i], media_movel);
+       mediaMovel = calcularMME(valores[i], mediaMovel, alpha);
+       printf("Valor: %.2f | EMA: %.2f\n", valores[i], mediaMovel);
     }
 
     return 0;
