@@ -2,11 +2,13 @@
 
 #define MAX_VALORES 5
 
-static float calcularMME(float valor_atual, float valor_anterior, float alpha);
+// Declaração da função
+static float calcularMME(float valor_atual, float valor_anterior, float constante);
+//
 
-static float calcularMME(float valor_atual, float valor_anterior, float alpha)
+static float calcularMME(float valor_atual, float valor_anterior, float constante)
 {
-    return (alpha * valor_atual) + ((1.0f - alpha) * valor_anterior);
+    return (constante * valor_atual) + ((1.0f - constante) * valor_anterior);
 }
 
 int main(void)
@@ -25,12 +27,12 @@ int main(void)
     scanf("%u", &janela);
 
     float mediaMovel = valores[0];
-    float alpha = 2.0f / (janela + 1.0f);
+    float constante = 2.0f / (janela + 1.0f);
 
-    for(int i = 0; i < MAX_VALORES; i++)
+    for(int i = 1; i < MAX_VALORES; i++)
     {
-       mediaMovel = calcularMME(valores[i], mediaMovel, alpha);
-       printf("Valor: %.2f | EMA: %.2f\n", valores[i], mediaMovel);
+       mediaMovel = calcularMME(valores[i], mediaMovel, constante);
+       printf("Valor: %.2f | Media Movel: %.2f\n", valores[i], mediaMovel);
     }
 
     return 0;
